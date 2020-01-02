@@ -1,0 +1,38 @@
+<div class="form-row" [formGroup]="group">
+
+  <div class="col-5">
+    <input type="text" class="form-control" placeholder="Field 1" formControlName="field1">
+  </div>
+
+  <ng-container formGroupName="field2">
+    <div class="col-3">
+      <input type="text" class="form-control" placeholder="Field 2A" formControlName="field2A"
+             (focus)="onField2Focus()" (blur)="onField2Blur()">
+      <div *ngIf="isField2Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <input type="text" class="form-control" placeholder="Field 2B" formControlName="field2B"
+             (focus)="onField2Focus()" (blur)="onField2Blur()">
+      <div *ngIf="isField2Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="col-2">
+    <input type="text" class="form-control" placeholder="Field 3" formControlName="field3"
+           (blur)="onField3Blur()" (focus)="onField3Focus()">
+    <div *ngIf="isField3Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+</div>
