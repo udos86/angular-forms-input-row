@@ -1,38 +1,36 @@
 <div class="form-row" [formGroup]="group">
 
+  <!-- FIELD 1 -->
   <div class="col-5">
     <input type="text" class="form-control" placeholder="Field 1" formControlName="field1">
   </div>
 
+  <!-- FIELD 2 -->
   <ng-container formGroupName="field2">
+
+    <!-- FIELD 2A -->
     <div class="col-3">
       <input type="text" class="form-control" placeholder="Field 2A" formControlName="field2A"
-             (focus)="onField2Focus()" (blur)="onField2Blur()">
-      <div *ngIf="isField2Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
-        <div class="spinner-border text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
+             [class.is-invalid]="invalid(field2A)" (blur)="onField2Blur()" (focus)="onField2Focus()">
+      <validation-message *ngIf="invalid(field2A)" [control]="field2A"></validation-message>
+      <input-spinner *ngIf="isField2Loading"></input-spinner>
     </div>
+
+    <!-- FIELD 2B -->
     <div class="col-2">
       <input type="text" class="form-control" placeholder="Field 2B" formControlName="field2B"
-             (focus)="onField2Focus()" (blur)="onField2Blur()">
-      <div *ngIf="isField2Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
-        <div class="spinner-border text-primary" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
+             [class.is-invalid]="invalid(field2B)" (blur)="onField2Blur()" (focus)="onField2Focus()">
+      <validation-message *ngIf="invalid(field2B)" [control]="field2B"></validation-message>
+      <input-spinner *ngIf="isField2Loading"></input-spinner>
     </div>
+
   </ng-container>
 
+  <!-- FIELD 3 -->
   <div class="col-2">
     <input type="text" class="form-control" placeholder="Field 3" formControlName="field3"
            (blur)="onField3Blur()" (focus)="onField3Focus()">
-    <div *ngIf="isField3Loading" class="d-flex w-100 position-absolute justify-content-center us-spinner-container">
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
+    <input-spinner *ngIf="isField3Loading"></input-spinner>
   </div>
 
 </div>

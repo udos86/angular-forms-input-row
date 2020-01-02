@@ -1,5 +1,5 @@
 import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {of, Subscription} from 'rxjs';
 import {delay, distinctUntilChanged, filter, skip, switchMap, tap} from 'rxjs/operators';
 
@@ -19,6 +19,12 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
 
   group: FormGroup;
 
+  field1: FormControl;
+  group2: FormGroup;
+  field2A: FormControl;
+  field2B: FormControl;
+  field3: FormControl;
+
   isField2Focused = false;
   isField2Loading = false;
 
@@ -33,29 +39,29 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
 
   ngOnInit() {
 
-    const field1  = new FormControl(null);
-    const field2A = new FormControl(null, Validators.required);
-    const field2B = new FormControl(null, Validators.required);
-    const field2  = new FormGroup({field2A, field2B}, {updateOn: 'blur'});
-    const field3  = new FormControl(null, {updateOn: 'blur'});
+    this.field1 = new FormControl(null);
+    this.field2A = new FormControl(null, Validators.required);
+    this.field2B = new FormControl(null, Validators.required);
+    this.group2 = new FormGroup({field2A: this.field2A, field2B: this.field2B}, {updateOn: 'blur'});
+    this.field3 = new FormControl(null, {updateOn: 'blur'});
 
-    this.group = new FormGroup({field1, field2, field3});
+    this.group = new FormGroup({field1: this.field1, field2: this.group2, field3: this.field3});
 
     const groupChanges$ = this.group.valueChanges.pipe(
       tap(value => this.onChange(value))
     );
 
-    const field2Changes$ = field2.valueChanges.pipe(
+    const field2Changes$ = this.group2.valueChanges.pipe(
       skip(1), // skip initial setting of value
       // debounceTime(500), // only needed when update on change
       distinctUntilChanged(),
-      filter(() => field2.valid && !this.isField3Focused),
+      filter(() => this.group2.valid && !this.isField3Focused),
       tap(() => this.onField3Loading()),
-      switchMap(() => of(`${field2A.value}/${field2B.value}`).pipe(delay(1500))),
+      switchMap(() => of(`${this.field2A.value}/${this.field2B.value}`).pipe(delay(1500))),
       tap(value => this.onField3Loaded(value))
     );
 
-    const field3Changes$ = field3.valueChanges.pipe(
+    const field3Changes$ = this.field3.valueChanges.pipe(
       skip(1), // skip initial setting of value
       // debounceTime(500), // only needed when update on change
       distinctUntilChanged(),
@@ -90,6 +96,10 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
     isDisabled ? this.group.disable() : this.group.enable();
   }
 
+  invalid(control: AbstractControl): boolean {
+    return control.touched && control.invalid;
+  }
+
   onField2Focus() {
     this.isField2Focused = true;
   }
@@ -100,18 +110,17 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
 
   onField2Loading() {
     this.isField2Loading = true;
-    this.group.get('field2').disable({emitEvent: false});
+    this.group2.disable({emitEvent: false});
   }
 
   onField2Loaded(value: any) {
-    const values = value.split('/');
-    const group  = this.group.get('field2') as FormGroup;
+    const values = value.split('/'); // !!! just a simple sample logic !!!
 
     this.isField2Loading = false;
 
-    group.get('field2A').setValue(values[0] || null, {emitEvent: false});
-    group.get('field2B').setValue(values[1] || null, {emitEvent: false});
-    group.enable({emitEvent: false}); // see https://github.com/angular/angular/issues/25030
+    this.field2A.setValue(values[0] || null, {emitEvent: false});
+    this.field2B.setValue(values[1] || null, {emitEvent: false});
+    this.group2.enable({emitEvent: false}); // avoid loading cascade // see https://github.com/angular/angular/issues/25030
     this.group.updateValueAndValidity();
   }
 
@@ -125,13 +134,13 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
 
   onField3Loading() {
     this.isField3Loading = true;
-    this.group.get('field3').disable({emitEvent: false});
+    this.field3.disable({emitEvent: false});
   }
 
   onField3Loaded(value: any) {
     this.isField3Loading = false;
-    this.group.get('field3').setValue(value, {emitEvent: false});
-    this.group.get('field3').enable({emitEvent: false}); // see https://github.com/angular/angular/issues/25030
+    this.field3.setValue(value, {emitEvent: false});
+    this.field3.enable({emitEvent: false}); // avoid loading cascade // see https://github.com/angular/angular/issues/25030
     this.group.updateValueAndValidity();
   }
 }
