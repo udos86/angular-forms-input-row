@@ -1,8 +1,22 @@
-.bi-arrows-fullscreen {
+.cdk-drag-handle {
   cursor: move;
 }
 
+.cdk-drop-list-dragging .cdk-drag {
+
+}
+
 .cdk-drag-placeholder {
-  /*box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);*/
-  visibility: hidden;
+  background-color: #f5f5f5;
+  border: 1px dashed #ababab;
+  border-radius: 4px;
+  min-height: 40px;
+}
+
+.cdk-drag-preview {
+  cursor: move !important;
+}
+
+.cdk-drop-list-dragging .row {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
 }
