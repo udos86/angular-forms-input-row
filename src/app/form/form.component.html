@@ -2,7 +2,7 @@
 
   <div formArrayName="rows" cdkDropList (cdkDropListDropped)="onRowDrop($event)">
 
-    <div *ngFor="let row of rows.controls; index as index; last as isLast" class="row mt-3 mb-3" cdkDrag cdkDragLockAxis="y">
+    <div @rowAnim *ngFor="let row of rows.controls; index as index; last as isLast" class="row mt-3 mb-3" cdkDrag cdkDragLockAxis="y">
 
       <div *cdkDragPlaceholder></div>
 
@@ -40,6 +40,13 @@
                 <path fill-rule="evenodd" d="M11.5 4a.5.5 0 01.5-.5h4a.5.5 0 01.5.5v4a.5.5 0 01-1 0V4.5H12a.5.5 0 01-.5-.5zm4.5 7.5a.5.5 0 00-.5.5v3.5H12a.5.5 0 000 1h4a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M11.146 11.11a.5.5 0 000 .708l4.5 4.5a.5.5 0 00.708-.707l-4.5-4.5a.5.5 0 00-.708 0zM3.682 3.646a.5.5 0 000 .708l4.5 4.5a.5.5 0 10.707-.708l-4.5-4.5a.5.5 0 00-.707 0z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M8.5 4a.5.5 0 00-.5-.5H4a.5.5 0 00-.5.5v4a.5.5 0 001 0V4.5H8a.5.5 0 00.5-.5z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+
+            <button type="button" class="btn btn-light" [disabled]="rows.controls.length == 1" (click)="insertRow(index + 1)">
+              <svg class="bi bi-plus" width="1.5em" height="1.5em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 5.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H6a.5.5 0 010-1h3.5V6a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M9.5 10a.5.5 0 01.5-.5h4a.5.5 0 010 1h-3.5V14a.5.5 0 01-1 0v-4z" clip-rule="evenodd"/>
               </svg>
             </button>
 

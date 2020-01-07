@@ -1,8 +1,8 @@
 import {animate, style, transition, trigger} from '@angular/animations';
 
-export const fadeIn = trigger('fadeIn', [
+export const rowAnim = trigger('rowAnim', [
   transition(':enter', [
-    style({opacity: 0, transform: 'translateY(-100%)'}),
+    style({opacity: 0, transform: 'translateY(-120%)', position: 'relative', 'z-index': -1}),
     animate('0.15s ease-out', style({opacity: 1, transform: 'none'})),
   ]),
   transition(':leave', [

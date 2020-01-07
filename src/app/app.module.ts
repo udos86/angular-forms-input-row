@@ -8,6 +8,7 @@ import {FormComponent} from './form/form.component';
 import {InputRowComponent} from './input-row/input-row.component';
 import {ValidationMessageComponent} from './validation-message/validation-message.component';
 import {InputSpinnerComponent} from './input-spinner/input-spinner.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {InputSpinnerComponent} from './input-spinner/input-spinner.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     DragDropModule
   ],
