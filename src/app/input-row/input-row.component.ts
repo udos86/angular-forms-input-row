@@ -96,7 +96,7 @@ export class InputRowComponent implements ControlValueAccessor, OnInit, OnDestro
     isDisabled ? this.group.disable() : this.group.enable();
   }
 
-  invalid(control: AbstractControl): boolean {
+  showInvalid(control: AbstractControl): boolean {
     return control.touched && control.invalid;
   }
 

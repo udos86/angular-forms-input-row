@@ -11,16 +11,16 @@
     <!-- FIELD 2A -->
     <div class="col-3">
       <input type="text" class="form-control" placeholder="Field 2A" formControlName="field2A"
-             [class.is-invalid]="invalid(field2A)" (blur)="onField2Blur()" (focus)="onField2Focus()">
-      <app-validation-message *ngIf="invalid(field2A)" [control]="field2A"></app-validation-message>
+             [class.is-invalid]="showInvalid(field2A)" (blur)="onField2Blur()" (focus)="onField2Focus()">
+      <app-validation-message *ngIf="showInvalid(field2A)" [control]="field2A"></app-validation-message>
       <app-input-spinner *ngIf="isField2Loading"></app-input-spinner>
     </div>
 
     <!-- FIELD 2B -->
     <div class="col-2">
       <input type="text" class="form-control" placeholder="Field 2B" formControlName="field2B"
-             [class.is-invalid]="invalid(field2B)" (blur)="onField2Blur()" (focus)="onField2Focus()">
-      <app-validation-message *ngIf="invalid(field2B)" [control]="field2B"></app-validation-message>
+             [class.is-invalid]="showInvalid(field2B)" (blur)="onField2Blur()" (focus)="onField2Focus()">
+      <app-validation-message *ngIf="showInvalid(field2B)" [control]="field2B"></app-validation-message>
       <app-input-spinner *ngIf="isField2Loading"></app-input-spinner>
     </div>
 
