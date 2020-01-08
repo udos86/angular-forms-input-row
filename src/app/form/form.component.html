@@ -5,7 +5,7 @@
     <div *ngFor="let row of rows.controls; index as index; last as isLast" class="row mt-4 mb-4"
          cdkDrag cdkDragLockAxis="y" @rowAnim>
 
-      <div *cdkDragPlaceholder class="mt-3 mb-3"></div>
+      <div *cdkDragPlaceholder class="mt-4 mb-4"></div>
 
       <app-input-row class="col" [formControlName]="index"></app-input-row>
 
