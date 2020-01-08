@@ -20,9 +20,13 @@ export class FormComponent implements OnInit {
       rows: this.formBuilder.array([this.formBuilder.control(null)])
     });
   }
-
+  
   get rows(): FormArray {
     return this.group.get('rows') as FormArray;
+  }
+
+  get isToolbarDisabled(): boolean {
+    return this.rows.controls.length === 1;
   }
 
   onRowDrop(event: CdkDragDrop<string[]>) {

@@ -2,7 +2,7 @@
 
   <div formArrayName="rows" cdkDropList (cdkDropListDropped)="onRowDrop($event)">
 
-    <div *ngFor="let row of rows.controls; index as index; last as isLast" class="row mt-4 mb-4"
+    <div *ngFor="let row of rows.controls; index as index;" class="row mt-4 mb-4"
          cdkDrag cdkDragLockAxis="y" @rowAnim>
 
       <div *cdkDragPlaceholder class="mt-4 mb-4"></div>
@@ -16,26 +16,26 @@
           <div class="btn-group" role="group" aria-label="Button group">
 
             <button type="button" class="btn btn-danger"
-                    [disabled]="rows.controls.length == 1" (click)="removeRow(index)">
+                    [disabled]="isToolbarDisabled" (click)="removeRow(index)">
               <img src="/assets/img/trash.svg" alt="Trash Icon" title="Delete row">
             </button>
 
             <button type="button" class="btn btn-light"
-                    [disabled]="rows.controls.length == 1" (click)="moveRow(index, -1)">
+                    [disabled]="isToolbarDisabled" (click)="moveRow(index, -1)">
               <img src="/assets/img/arrow-up.svg" alt="Arrow Up Icon" title="Move row up">
             </button>
 
             <button type="button" class="btn btn-light"
-                    [disabled]="rows.controls.length == 1" (click)="moveRow(index, +1)">
+                    [disabled]="isToolbarDisabled" (click)="moveRow(index, +1)">
               <img src="/assets/img/arrow-down.svg" alt="Arrow Down Icon" title="Move row down">
             </button>
 
-            <button type="button" class="btn btn-light" [disabled]="rows.controls.length == 1" cdkDragHandle>
+            <button type="button" class="btn btn-light"
+                    [disabled]="isToolbarDisabled" cdkDragHandle>
               <img src="/assets/img/arrows-fullscreen.svg" alt="Drag & Drop Icon" title="Drag and drop row">
             </button>
 
-            <button type="button" class="btn btn-light"
-                    [disabled]="rows.controls.length == 1" (click)="insertRow(index + 1)">
+            <button type="button" class="btn btn-light" (click)="insertRow(index + 1)">
               <img src="/assets/img/plus.svg" alt="Plus Icon" title="Add row">
             </button>
 

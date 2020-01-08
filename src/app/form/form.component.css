@@ -31,4 +31,7 @@ button.btn {
   line-height: 1;
 }
 
+button[disabled] {
+  cursor: not-allowed;
+}
 
