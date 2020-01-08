@@ -29,11 +29,11 @@ export class FormComponent implements OnInit {
     this.moveRow(event.previousIndex, event.currentIndex - event.previousIndex);
   }
 
-  addRow() {
+  addRow(): void {
     this.rows.push(this.formBuilder.control(null));
   }
 
-  insertRow(index: number) {
+  insertRow(index: number): void {
     this.rows.insert(index, this.formBuilder.control(null));
   }
 
